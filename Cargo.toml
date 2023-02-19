@@ -1,0 +1,32 @@
+[package]
+name = "sudoku"
+version = "0.1.0"
+authors = ["some.near"]
+edition = "2018"
+
+
+[dependencies]
+near-sdk = "4.0.0"
+rand = "0.7.3"
+thiserror = "1.0.21"
+crunchy = "0.2.1"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+codegen-units = 1
+# Tell `rustc` to optimize for small code size.
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+# Opt into extra safety checks on arithmetic operations https://stackoverflow.com/a/64136471/249801
+overflow-checks = true
+
+[build]
+rustflags = ["-C", "link-args=-s"]
+
+[dev-dependencies]
+strum = "0.19.2"
+strum_macros = "0.19.2"
